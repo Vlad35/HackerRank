@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        String s = sc.nextLine();
+        int k = sc.nextInt();
+        if(k > 26) {
+            k -= (k / 26) * 26;
+        }
+        char[] c = s.toCharArray();
+        for(int i = 0; i< c.length;i ++) {
+            if(c[i] >=65 && c[i] < 91) {
+                c[i] += k;
+                if(c[i] > 90) {
+                    c[i] -= 26;
+                }
+            }else if(c[i] >= 97 && c[i] < 123) {
+                c[i] += k;
+                if(c[i] > 122) {
+                    c[i] -= 26;
+                }
+            }
+        }
+        s = "";
+        for(int i = 0;i < c.length;i ++) {
+            s += c[i];
+        }
+        System.out.println(s);
+    }
+}
