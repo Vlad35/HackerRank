@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class Main {
+    private static int Xor(int n,int i) {
+        return n ^ i;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if (n == 0) System.out.println(1);
+
+        String binary = Long.toBinaryString(n);
+        int count = 0;
+        for(int i = binary.indexOf("1"); i < binary.length(); i++)
+            if(binary.charAt(i) == '0') count++;
+
+        System.out.println((long) Math.pow(2, count));
+    }
+}
