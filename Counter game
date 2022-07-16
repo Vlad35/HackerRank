@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class Main {
+    private static boolean isPower(long n) {
+        int res = 1;
+        while(n > 1) {
+            if(n % 2 == 1) {
+                res *= 0;
+            }
+            n /= 2;
+        }
+        return res == 1;
+    }
+    private static long diffMaxLowerPower(long n) {
+        long res = 1;
+        while(res <= n / 2) {
+            res *= 2;
+        }
+        return n - res;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        int count = 0;
+        while(n != 1) {
+            if(isPower(n)) {
+                n = n / 2;
+            } else{
+                n = diffMaxLowerPower(n);
+            }
+            count ++;
+        }
+        if(count % 2 == 1) {
+            System.out.println("Louise");
+        }else {
+            System.out.println("Richard");
+        }
+    }
+}
