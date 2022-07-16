@@ -1,0 +1,148 @@
+import java.util.*;
+
+public class Main {
+    private static void PosIs(int x,int y) {
+        System.out.println("The current position is: (" + x + ", " + y + ")");
+    }
+    private static int getCellsQueenCanAttack(int n, int x, int y) {
+        int ortog = 2 * (n - 1);
+        int diag = 2 * n - 2 - Math.abs(x - y) - Math.abs(x + y - n - 1);
+        int ans = ortog + diag;
+        return ans;
+    }
+    private static String getRelativeLocation(int x,int y,int Ob_x,int Ob_y) {
+        if(Ob_y == y && Ob_x < x) {
+            return "L";
+        }else if(Ob_y == y && Ob_x > x) {
+            return "R";
+        }else if(x == Ob_x && Ob_y > y) {
+            return "U";
+        }else if(x == Ob_x && Ob_y <  y) {
+            return "D";
+        }else if(Math.abs(x - Ob_x) == Math.abs(y - Ob_y)) {
+            if(Ob_y > y && Ob_x < x) {
+                return "UL";
+            }else if(Ob_y > y && Ob_x > x) {
+                return "UR";
+            }else if(Ob_y < y && Ob_x > x) {
+                return "DR";
+            }else {
+                return "DL";
+            }
+        }
+        return "Wrong Cells!";
+    }
+    private static int getCellsBlockedByPawns(int x,int y,int[][] Ob,int n) {
+        Set<HashSet<Integer>> blockedCells = new HashSet<>();
+        for(int i = 0;i < Ob.length;i ++) {
+            int Ob_x = Ob[i][1];
+            int Ob_y = Ob[i][0];
+            String position = getRelativeLocation(x,y,Ob_x,Ob_y);
+            if(position == "U") {
+                for(int j = y;j < n + 1;j ++) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(j);
+                    set.add(x);
+                    blockedCells.add(set);
+                    set.clear();
+                }
+            }
+            if(position == "D") {
+                for(int j = y;j > 0;j --) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(j);
+                    set.add(x);
+                    blockedCells.add(set);
+                    set.clear();
+                }
+            }
+            if(position == "L") {
+                for(int j = x;j > 0;j --) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(y);
+                    set.add(j);
+                    blockedCells.add(set);
+                    set.clear();
+                }
+            }
+            if(position == "R") {
+                for(int j = x;j < n + 1;j ++) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(y);
+                    set.add(j);
+                    blockedCells.add(set);
+                    set.clear();
+                }
+            }
+            if(position == "UL") {
+                while (y <= n && x > 0) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(y);
+                    set.add(x);
+                    blockedCells.add(set);
+                    set.clear();
+                    x --;
+                    y ++;
+                }
+            }
+            if(position == "UR") {
+                while (y <= n && x <= n) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(y);
+                    set.add(x);
+                    blockedCells.add(set);
+                    set.clear();
+                    x ++;
+                    y ++;
+                }
+            }
+            if(position == "DR") {
+                while (y > 0 && x <= n) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(y);
+                    set.add(x);
+                    blockedCells.add(set);
+                    set.clear();
+                    x ++;
+                    y --;
+                }
+            }
+            if(position == "DL") {
+                while (y > 0 && x > 0) {
+                    HashSet<Integer> set = new HashSet<>();
+                    set.add(y);
+                    set.add(x);
+                    blockedCells.add(set);
+                    set.clear();
+                    x --;
+                    y --;
+                }
+            }
+        }
+        return blockedCells.size();
+    }
+
+    private static int queensAttack(int n,int x,int y,int[][] arr) {
+        int queenCells = getCellsQueenCanAttack(n,x,y);
+        if(arr.length == 0) {
+            return queenCells;
+        }else {
+            int pawnCells = getCellsBlockedByPawns(x,y,arr,n);
+            return queenCells - pawnCells;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int[][] NoPass = new int[k][2];
+        for(int i = 0;i < k;i ++) {
+            for(int j = 0;j < 2;j ++) {
+                NoPass[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println(queensAttack(n,x,y,NoPass));
+    }
+}
