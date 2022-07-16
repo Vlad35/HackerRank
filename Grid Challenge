@@ -1,0 +1,39 @@
+import org.w3c.dom.ls.LSInput;
+
+import java.util.*;
+
+public class Main {
+    public static String gridChallenge(List<String> grid) {
+        // Write your code here
+
+        int n = grid.get(0).length();
+
+        char[] prev = grid.get(0).toCharArray();
+        Arrays.sort(prev);
+
+        for(int i=1; i<grid.size(); i++) {
+            char[] cur = grid.get(i).toCharArray();
+            Arrays.sort(cur);
+
+            for(int j=0; j<n; j++) {
+
+                if( (cur[j]) < (prev[j]) ) {
+                    return "NO";
+                }
+            }
+
+            prev = cur;
+        }
+
+        return "YES";
+    }
+    public static void main(String[] args) {
+        Scanner sc  = new Scanner(System.in);
+        List<String> list = new ArrayList<>();
+        int size = sc.nextInt();
+        for(int i = 0;i < size;i ++) {
+            list.add(sc.nextLine());
+        }
+        System.out.println(gridChallenge(list));
+    }
+}
