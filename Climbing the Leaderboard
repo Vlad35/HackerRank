@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Main {
+    /*public static List<Integer> climbingLeaderboard(List<Integer> ranked, List<Integer> player) {
+
+    }*/
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size1 = sc.nextInt();
+        int size2 = sc.nextInt();
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        for(int i = 0;i < size1;i ++) {
+            list1.add(sc.nextInt());
+        }
+        for(int j = 0;j < size2;j ++) {
+            list2.add(sc.nextInt());
+        }
+        list1.sort(null);
+        for(int i = 0;i < list1.size() - 1;i ++) {
+            if(list1.get(i).equals(list1.get(i + 1))) {
+                list1.remove(i);
+            }
+        }
+        int[] arr = new int[list1.size()];
+        int count = 0;
+        for(int i = list1.size() - 1;i >= 0;i --) {
+            arr[i] = ++count;
+        }
+        for(int i = 0;i < arr.length;i ++) {
+            System.out.print(arr[i] + " ");
+        }
+        int[] new_arr = new int[list2.size()];
+
+        System.out.println(list1 + " " + list2);
+        for(int i = 0;i < new_arr.length;i ++) {
+            System.out.print(new_arr[i] + " ");
+        }
+        //System.out.println(climbingLeaderboard(list1,list2));
+    }
+}
