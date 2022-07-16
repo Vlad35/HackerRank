@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int a = s.charAt(0) - 48;
+        int b = s.charAt(1) - 48;
+        String s1 = "";
+        if(s.contains("P")){
+            System.out.println(a + " " + b);
+            int ans = 10 * a + b;
+            System.out.println(ans + 12);
+            if(ans + 12 >= 24) {
+                ans = ans - 12;
+            }
+            s1 += Character.forDigit((ans + 12) / 10,10);
+            s1 += Character.forDigit((ans + 12) % 10,10);
+            s1 = s1 + s.substring(2,s.length() - 2);
+        }else if(s.contains("A")) {
+            System.out.println(a + " " + b);
+            int ans = 10 * a + b;
+            System.out.println(ans - 12);
+            if(ans - 12 < 0) {
+                ans += 12;
+            }
+            s1 += Character.forDigit((ans - 12) / 10,10);
+            s1 += Character.forDigit((ans -  12) % 10,10);
+            s1 = s1 + s.substring(2,s.length() - 2);
+        }
+        System.out.println(s1);
+    }
+}
