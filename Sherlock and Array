@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+    public static int superDigit(String n, int k) {
+        // Write your code here
+        if(n.length() == 1) {
+            return Integer.valueOf(n);
+        }
+
+        long value = 0;
+        for(char c : n.toCharArray()) {
+            value += Character.getNumericValue(c);
+        }
+
+        return superDigit(Long.toString(value*k), 1);
+
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int k = sc.nextInt();
+        System.out.println(superDigit(s, k));
+    }
+}
