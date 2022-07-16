@@ -1,0 +1,17 @@
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+    private static void extraLongFactorials(int n) {
+        BigInteger num = BigInteger.ONE;
+        for(long i = n;i > 1;i --) {
+            num = num.multiply(BigInteger.valueOf(i));
+        }
+        System.out.println(num);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        extraLongFactorials(n);
+    }
+}
