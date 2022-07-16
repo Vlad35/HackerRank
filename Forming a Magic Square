@@ -1,0 +1,122 @@
+import java.util.*;
+public class Main {
+    private static int Diff(int[][] arr1,int[][]arr2) {
+        int res = 0;
+        for(int i = 0;i < 3;i ++) {
+            for(int j = 0;j < 3;j ++) {
+                res += Math.abs(arr1[i][j] - arr2[i][j]);
+            }
+        }
+        return res;
+    }
+    private static void InitializeMagicCube(int[][][] MagicArr) {
+        MagicArr[0][0][0] = 8;
+        MagicArr[0][0][1] = 1;
+        MagicArr[0][0][2] = 6;
+        MagicArr[0][1][0] = 3;
+        MagicArr[0][1][1] = 5;
+        MagicArr[0][1][2] = 7;
+        MagicArr[0][2][0] = 4;
+        MagicArr[0][2][1] = 9;
+        MagicArr[0][2][2] = 2;
+
+        MagicArr[1][0][0] = 4;
+        MagicArr[1][0][1] = 3;
+        MagicArr[1][0][2] = 8;
+        MagicArr[1][1][0] = 9;
+        MagicArr[1][1][1] = 5;
+        MagicArr[1][1][2] = 1;
+        MagicArr[1][2][0] = 2;
+        MagicArr[1][2][1] = 7;
+        MagicArr[1][2][2] = 6;
+
+        MagicArr[2][0][0] = 2;
+        MagicArr[2][0][1] = 9;
+        MagicArr[2][0][2] = 4;
+        MagicArr[2][1][0] = 7;
+        MagicArr[2][1][1] = 5;
+        MagicArr[2][1][2] = 3;
+        MagicArr[2][2][0] = 6;
+        MagicArr[2][2][1] = 1;
+        MagicArr[2][2][2] = 8;
+
+        MagicArr[3][0][0] = 6;
+        MagicArr[3][0][1] = 7;
+        MagicArr[3][0][2] = 2;
+        MagicArr[3][1][0] = 1;
+        MagicArr[3][1][1] = 5;
+        MagicArr[3][1][2] = 9;
+        MagicArr[3][2][0] = 8;
+        MagicArr[3][2][1] = 3;
+        MagicArr[3][2][2] = 4;
+
+        MagicArr[4][0][0] = 6;
+        MagicArr[4][0][1] = 1;
+        MagicArr[4][0][2] = 8;
+        MagicArr[4][1][0] = 7;
+        MagicArr[4][1][1] = 5;
+        MagicArr[4][1][2] = 3;
+        MagicArr[4][2][0] = 2;
+        MagicArr[4][2][1] = 9;
+        MagicArr[4][2][2] = 4;
+
+        MagicArr[5][0][0] = 2;
+        MagicArr[5][0][1] = 7;
+        MagicArr[5][0][2] = 6;
+        MagicArr[5][1][0] = 9;
+        MagicArr[5][1][1] = 5;
+        MagicArr[5][1][2] = 1;
+        MagicArr[5][2][0] = 4;
+        MagicArr[5][2][1] = 3;
+        MagicArr[5][2][2] = 8;
+
+        MagicArr[6][0][0] = 4;
+        MagicArr[6][0][1] = 9;
+        MagicArr[6][0][2] = 2;
+        MagicArr[6][1][0] = 3;
+        MagicArr[6][1][1] = 5;
+        MagicArr[6][1][2] = 7;
+        MagicArr[6][2][0] = 8;
+        MagicArr[6][2][1] = 1;
+        MagicArr[6][2][2] = 6;
+
+        MagicArr[7][0][0] = 8;
+        MagicArr[7][0][1] = 3;
+        MagicArr[7][0][2] = 4;
+        MagicArr[7][1][0] = 1;
+        MagicArr[7][1][1] = 5;
+        MagicArr[7][1][2] = 9;
+        MagicArr[7][2][0] = 6;
+        MagicArr[7][2][1] = 7;
+        MagicArr[7][2][2] = 2;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] arr = new int[3][3];
+        for(int i = 0;i < 3;i ++) {
+            for(int j = 0;j < 3;j ++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        int[][][] MagicArr = new int[8][3][3];
+        InitializeMagicCube(MagicArr);
+        int ans = Integer.MAX_VALUE;
+        for(int i = 0;i < 8;i ++) {
+            if(ans > Diff(MagicArr[i], arr)) {
+                ans = Diff(MagicArr[i], arr);
+            }
+        }
+        for(int i = 0;i < 8;i ++) {
+            if(ans == Diff(MagicArr[i], arr)) {
+                System.out.println("The closest Magic Array is: ");
+                for(int j = 0;j < 3;j ++) {
+                    for(int k = 0;k < 3;k ++) {
+                        System.out.print(MagicArr[i][j][k] + " ");
+                    }
+                    System.out.println();
+                }
+            }
+        }
+        System.out.println("The answer is: " + ans);
+    }
+}
