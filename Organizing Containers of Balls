@@ -1,0 +1,58 @@
+import java.util.*;
+
+public class Main {
+    private static void PrintArray(int[][] arr) {
+        for(int i = 0;i < arr.length;i ++) {
+            for(int j = 0;j < arr[0].length;j ++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+    private static void PrintArray(int[] arr) {
+        for(int i = 0;i < arr.length;i ++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    public static void main(String[] args) {
+        //List of Lists Initialization!
+        /*
+        Scanner sc = new Scanner(System.in);
+        List<List<Integer>> list = new ArrayList<>();
+        int Len = sc.nextInt();
+        List<List<Integer>> lists = new ArrayList<>();
+        for(int k = 0;k < Len;k ++) {
+            int size = sc.nextInt();
+            int[] arr = new int[size];
+            for(int i = 0;i < size;i ++) {
+                arr[i] = sc.nextInt();
+            }
+            for(int i = 0;i < arr.length;i ++) {
+                lists.add(Arrays.asList(arr[i]));
+            }
+        }
+        lists.forEach(System.out::print);*/
+        Scanner sc = new Scanner(System.in);
+        int row = sc.nextInt();;
+        int col = sc.nextInt();
+        int[][] arr = new int[row][col];
+        for(int i = 0;i < row;i ++) {
+            for (int j = 0;j < col;j ++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        int c[] = new int[arr.length];
+        int t[] = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length - 1; j++) {
+                c[i] += arr[i][j];
+                t[j] += arr[i][j];
+            }
+        }
+        Arrays.sort(c);
+        Arrays.sort(t);
+        System.out.println(Arrays.equals(c,t) ? "Possible" : "Impossible");
+    }
+}
